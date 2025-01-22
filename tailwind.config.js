@@ -13,6 +13,7 @@ export default {
     },
     extend: {
       colors: {
+        'text': 'rgba(15, 23, 42, 1)',
         'accent': 'rgba(112, 119, 134, 1)',
         'main': 'rgba(221, 223, 228, 1)',
         'layer': 'rgba(245, 246, 246, 1)',

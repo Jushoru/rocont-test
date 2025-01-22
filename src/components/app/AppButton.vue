@@ -23,6 +23,6 @@ const imgUrl = computed(
     <img class="w-[20px] h-[20px] mr-[0.5px] opacity-50 group-hover:opacity-100"
          :alt="`кнопка `+text"
          :src="imgUrl"/>
-    {{ text }}
+    <span class="ml-1">{{ text }}</span>
   </button>
 </template>

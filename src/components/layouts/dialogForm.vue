@@ -18,10 +18,15 @@ function closeFromEvent(e: Event): void {
 </script>
 
 <template>
-  <dialog class="w-[464px] h-[522px] rounded-2xl bg-white p-8"
+  <dialog class="rounded-2xl text-text"
           ref="dialogRef"
           @click="closeFromEvent"
   >
+    <button class="absolute w-6 h-6 right-8 top-8" @click="closeDialog">
+      <img class=""
+           src="@/assets/img/xModal.svg"
+           alt="закрыть_модальное_окно">
+    </button>
     <slot/>
   </dialog>
 </template>

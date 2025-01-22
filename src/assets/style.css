@@ -13,9 +13,11 @@
         src: url(/fonts/Inter-SemiBold.woff2) format("opentype");
         font-weight: 600;
     }
-}
 
-html {
-    font-family: 'Inter', sans-serif;
-    font-weight: normal;
+    html {
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        color: rgba(15, 23, 42, 1)
+    }
+
 }
