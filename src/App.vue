@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import AppButton from "@/components/app/AppButton.vue";
-import Dialog from "@/components/app/Dialog.vue";
 import { ref } from "vue";
 import DialogForm from "@/components/layouts/dialogForm.vue";
-import Form from "@/components/layouts/form.vue";
+import FormAdd from "@/components/layouts/formAdd.vue";
 
-const dialogTarget = ref<InstanceType<typeof Dialog>>()
+const dialogTarget = ref<InstanceType<typeof DialogForm>>()
 
 const showDialog = () => dialogTarget.value?.show()
+
+
 </script>
 
 <template>
@@ -27,7 +28,7 @@ const showDialog = () => dialogTarget.value?.show()
             <img class="text-gray-400" src="@/assets/img/search.svg" alt=""/>
           </div>
           <input class="relative z-0 w-[54rem] h-[41px] pl-[36px] text-[14px] leading-6 rounded-lg
-                    focus-visible:outline focus-visible:outline-green"
+                    focus-visible:outline focus-visible:outline-green focus-visible:outline-2"
                  placeholder="Найти ту самую книгу"
           />
         </div>
@@ -42,10 +43,11 @@ const showDialog = () => dialogTarget.value?.show()
         </div>
       </div>
     </div>
+
   </div>
 
   <DialogForm ref="dialogTarget">
-    <Form/>
+    <FormAdd :dialog="dialogTarget" />
   </DialogForm>
 
 </template>

@@ -18,7 +18,8 @@ const imgUrl = computed(
           :class="isAdd ?
           'bg-green hover:bg-greenHover' :
           'bg-red hover:bg-redHover'"
-          @click="$emit('click')"
+          type="button"
+          @click="$emit('btnClick')"
   >
     <img class="w-[20px] h-[20px] mr-[0.5px] opacity-50 group-hover:opacity-100"
          :alt="`кнопка `+text"
