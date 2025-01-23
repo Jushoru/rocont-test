@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import AppButton from "@/components/app/AppButton.vue";
 import {ref} from "vue";
+import { useSamplesStore } from "@/stores/samplesStore.ts";
 
 const props = defineProps<{
   dialog: InstanceType<typeof HTMLDialogElement> | undefined
 }>();
 
+const samplesStore = useSamplesStore()
 const name = ref('')
 const author = ref('')
 const year = ref('')
@@ -36,16 +38,16 @@ const formSubmit = () => {
     errors.value.name = 'Введите название';
     console.log(errors.value.name)
     hasError = true
-  } else if (name.value.length > 100) {
-    errors.value.name = 'Слишком длинное название (макс. 100 символов)';
+  } else if (name.value.length > 300) {
+    errors.value.name = 'Слишком длинное название (макс. 300 символов)';
     hasError = true
   }
 
   if (!author.value.trim()) {
     errors.value.author = 'Введите автора';
     hasError = true
-  } else if (author.value.length > 30) {
-    errors.value.author = 'Слишком длинное имя (макс. 30 символов)';
+  } else if (author.value.length > 60) {
+    errors.value.author = 'Слишком длинное имя (макс. 60 символов)';
     hasError = true
   }
 
@@ -63,30 +65,27 @@ const formSubmit = () => {
   if (!genre.value.trim()) {
     errors.value.genre = 'Введите жанр';
     hasError = true
-  } else if (genre.value.length > 30) {
-    errors.value.genre = 'Слишком длинное название (макс. 30 символов)';
+  } else if (genre.value.length > 60) {
+    errors.value.genre = 'Слишком длинное название (макс. 60 символов)';
     hasError = true
   }
 
   if (!hasError && isAgree.value) {
-    console.log('Validation SUCCESS!!!');
-    props.dialog?.close();
+    samplesStore.loadBooks()
 
-    const booksString = localStorage.getItem('books')
-    const books = booksString ? JSON.parse(booksString) : {}
+    const newId = Object.keys(samplesStore.books).length + 1
 
-    const newId = Object.keys(books).length + 1
-
-    books[newId] = {
+    samplesStore.books[newId] = {
       name: name.value,
       author: author.value,
       year: year.value,
       genre: genre.value
     };
 
-    localStorage.setItem('books', JSON.stringify(books))
+    localStorage.setItem('books', JSON.stringify(samplesStore.books))
     // localStorage.clear()
-    console.log(localStorage.getItem('books'))
+    samplesStore.loadBooks()
+    props.dialog?.close();
 
     name.value = ''
     author.value = ''
