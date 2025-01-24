@@ -18,7 +18,8 @@ function closeFromEvent(e: Event): void {
 </script>
 
 <template>
-  <dialog class="rounded-2xl text-text"
+  <dialog class="relative desktop:h-min tablet:h-min mobile:h-screen h-screen desktop:rounded-2xl tablet:rounded-2xl text-text
+                 desktop:w-min tablet:w-min mobile:w-screen w-screen desktop:m-auto tablet:m-auto mobile:m-0 m-0"
           ref="dialogRef"
           @click="closeFromEvent"
   >
@@ -30,3 +31,11 @@ function closeFromEvent(e: Event): void {
     <slot/>
   </dialog>
 </template>
+<style>
+dialog::before,
+dialog::after {
+  content: none;
+  padding: 0
+
+}
+</style>

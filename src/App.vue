@@ -53,10 +53,10 @@ onMounted(() => {
 </script>
 
 <template>
-<div class="h-screen">
+<div class="h-screen w-full flex flex-col">
   <div class="w-full py-4 flex flex-col items-center bg-layer">
-    <div class="flex flex-col justify-center items-center desktop:w-[1024px] tablet:w-[768px] mobile:w-[480px] w-[320px] px-10">
-      <div class="flex justify-center pb-4">
+    <div class="desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] flex w-[280px] flex-col justify-center items-center">
+      <div class="flex desktop:justify-center tablet:justify-center mobile:justify-center justify-between w-[280px] pb-4">
         <img class="w-[55px] h-[41px]"
              src="@/assets/img/logo.svg"
              alt="лого"
@@ -70,31 +70,31 @@ onMounted(() => {
           <input class="relative z-0 desktop:w-[864px] tablet:w-[544px] mobile:w-[352px] w-[41px] h-[41px] pl-[36px]
                         text-[14px] leading-6 rounded-lg
                         focus-visible:outline focus-visible:outline-green focus-visible:outline-2"
-                 :placeholder="screenWidth > 480 ? 'Найти ту самую книгу' : ''"
+                 :placeholder="screenWidth >= 480 ? 'Найти ту самую книгу' : ''"
                  v-model="searchQuery"
           />
         </div>
       </div>
-      <div class="flex justify-between desktop:w-full tablet:items-center tablet:w-[624px] mobile:w-[428px]">
+      <div class="flex justify-between w-full tablet:items-center">
         <div class="flex items-start w-full justify-start">
           <h1>Книги в каталоге</h1>
           <h1 class="ml-2 text-accent">{{ searchQuery === '' ? samplesStore.getBookCount() : '«' + truncatedSearchQuery + '»'}}</h1>
         </div>
-        <div class="w-[157px]" v-if="screenWidth >= 768">
+        <div class="min-w-[157px]" v-if="screenWidth >= 768">
           <AppButton :isAdd="true" img-name="fileAdd" text="Добавить книгу" @click="showDialog"/>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="relative w-full pt-4 pb-4 h-[82%] flex flex-col items-center">
-    <div class="relative w-[1024px] max-h-full flex flex-col items-center px-10 overflow-y-auto">
+  <div class="relative max-w-full overflow-y-auto w-full mt-4 desktop:mb-4 tablet:mb-4 mobile:mb-14 mb-14 flex flex-col items-center">
+    <div class="relative desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] w-[280px] flex flex-col items-center">
       <Books :filtered-books="filteredBooks"/>
       <div v-if="searchQuery && Object.keys(filteredBooks).length === 0" class="w-full flex items-start">
         <p class="text-[16px] text-accent leading-5">По вашему запросу ничего не найдено</p>
       </div>
     </div>
-    <div class="fixed w-[468px] bottom-2" v-if="screenWidth < 768">
+    <div class="fixed mobile:w-[448px] w-[304px] bottom-2" v-if="screenWidth < 768">
       <AppButton :isAdd="true" img-name="fileAdd" text="Добавить книгу" @click="showDialog"/>
     </div>
   </div>
@@ -109,4 +109,5 @@ onMounted(() => {
 h1 {
   @apply font-semibold text-xl leading-5
 }
+
 </style>
