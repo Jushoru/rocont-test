@@ -9,6 +9,7 @@ import { useSamplesStore } from "@/stores/samplesStore.ts";
 const samplesStore = useSamplesStore()
 const dialogTarget = ref<InstanceType<typeof DialogForm>>()
 const screenWidth = ref(window.innerWidth)
+const isSearching = ref(false)
 
 
 const showDialog = () => dialogTarget.value?.show()
@@ -28,21 +29,26 @@ const filteredBooks = computed(() => {
 
   const query = searchQuery.value.toLowerCase();
 
-  console.log(Object.fromEntries(
-      Object.entries(samplesStore.books).filter(([, book]) =>
-          book.name.toLowerCase().includes(query)
-      )
-  ))
-
   return Object.fromEntries(
-      Object.entries(samplesStore.books).filter(([, book]) =>
-          book.name.toLowerCase().includes(query)
-      )
+      Object.entries(samplesStore.books).filter(([, book]) => {
+
+        type bookData = {
+          name: string;
+          author: string;
+          year: string;
+          genre: string;
+        }
+        const typedBook = book as bookData;
+        return typedBook.name.toLowerCase().includes(query);
+      })
   );
 });
 
 const updateWidth = () => {
   screenWidth.value = window.innerWidth
+  if (screenWidth.value > 320) {
+    isSearching.value = false;
+  }
 }
 
 onMounted(() => {
@@ -57,27 +63,38 @@ onMounted(() => {
   <div class="w-full py-4 flex flex-col items-center bg-layer">
     <div class="desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] flex w-[280px] flex-col justify-center items-center">
       <div class="flex desktop:justify-center tablet:justify-center mobile:justify-center justify-between w-[280px] pb-4">
-        <img class="w-[55px] h-[41px]"
+        <img v-if="!isSearching"
+             class="w-[55px] h-[41px]"
              src="@/assets/img/logo.svg"
              alt="лого"
         />
-        <div class="relative desktop:ml-[25px] tablet:ml-[25px] mobile:ml-[17px] ">
-          <div class="absolute z-50 inset-y-0 left-0 pl-3
-                    flex items-center
-                    pointer-events-none">
-            <img class="text-gray-400 cursor-pointer" src="@/assets/img/search.svg" alt=""/>
+        <div v-if="screenWidth >= 480 || isSearching" class="relative desktop:ml-[25px] tablet:ml-[25px] mobile:ml-[17px] ">
+          <div class="absolute z-50 inset-y-0 left-0 pl-3 flex items-center">
+            <img v-if="screenWidth >= 480" class="text-accent" src="@/assets/img/search.svg" alt=""/>
+            <img v-if="isSearching"
+                 class="w-[20px] cursor-pointer"
+                 src="@/assets/img/xModal.svg"
+                 alt="закрыть_поле_ввода"
+                 @click="isSearching = !isSearching" />
           </div>
-          <input class="relative z-0 desktop:w-[864px] tablet:w-[544px] mobile:w-[352px] w-[41px] h-[41px] pl-[36px]
-                        text-[14px] leading-6 rounded-lg
+          <input v-if="isSearching || screenWidth >= 480"
+                 class="relative z-0 desktop:w-[864px] tablet:w-[544px] mobile:w-[352px] w-[280px] h-[41px] pl-[36px]
+                        text-[14px] leading-6 rounded-lg font-Inter
                         focus-visible:outline focus-visible:outline-green focus-visible:outline-2"
                  :placeholder="screenWidth >= 480 ? 'Найти ту самую книгу' : ''"
                  v-model="searchQuery"
           />
         </div>
+        <button v-else-if="!isSearching"
+                class="w-[41px] flex items-center justify-center bg-white rounded-lg cursor-pointer"
+                @click="isSearching = !isSearching"
+        >
+          <img class="text-accent" src="@/assets/img/search.svg" alt=""/>
+        </button>
       </div>
       <div class="flex justify-between w-full tablet:items-center">
         <div class="flex items-start w-full justify-start">
-          <h1>Книги в каталоге</h1>
+          <h1>Книги {{ searchQuery === '' ? 'в каталоге' : 'по запросу' }}</h1>
           <h1 class="ml-2 text-accent">{{ searchQuery === '' ? samplesStore.getBookCount() : '«' + truncatedSearchQuery + '»'}}</h1>
         </div>
         <div class="min-w-[157px]" v-if="screenWidth >= 768">

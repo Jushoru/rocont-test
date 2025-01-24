@@ -103,9 +103,9 @@ const clearError = (field: keyof typeof errors.value) => {
 </script>
 
 <template>
-  <div class="w-[464px] bg-white p-8">
+  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white desktop:m-8 tablet:m-8 mx-auto my-5">
     <h1 class="">Добавить книгу</h1>
-    <p class="mt-2">Заполните все поля и добавьте книгу в список</p>
+    <p class="mt-2 text-pretty">Заполните все поля и добавьте книгу в список</p>
     <form class="w-full mt-4">
       <div class="mb-2">
         <label class="inputLabel">
@@ -169,7 +169,7 @@ const clearError = (field: keyof typeof errors.value) => {
         </label>
       </div>
 
-      <div class="ml-auto w-[114px]">
+      <div class="ml-auto desktop:w-[114px] tablet:w-[114px] mobile:w-full w-full">
         <AppButton :is-add="true" img-name="fileAdd" text="Добавить" @btn-click="formSubmit" />
       </div>
     </form>

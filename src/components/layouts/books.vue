@@ -1,4 +1,11 @@
 <script setup lang="ts">
+type bookData = {
+  name: string;
+  author: string;
+  year: string;
+  genre: string;
+}
+
 defineProps<{
   filteredBooks: Record<string, bookData>;
 }>()

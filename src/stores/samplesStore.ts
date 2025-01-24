@@ -1,7 +1,12 @@
 import {defineStore} from "pinia"
-import type { bookData } from "../types/bookData";
 import { ref } from "vue";
 
+type bookData = {
+    name: string;
+    author: string;
+    year: string;
+    genre: string;
+}
 
 export const useSamplesStore = defineStore('samples', () => {
     const books = ref<Record<string, bookData>>({});

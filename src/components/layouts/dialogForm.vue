@@ -18,12 +18,12 @@ function closeFromEvent(e: Event): void {
 </script>
 
 <template>
-  <dialog class="relative desktop:h-min tablet:h-min mobile:h-screen h-screen desktop:rounded-2xl tablet:rounded-2xl text-text
-                 desktop:w-min tablet:w-min mobile:w-screen w-screen desktop:m-auto tablet:m-auto mobile:m-0 m-0"
+  <dialog class="relative desktop:min-h-min tablet:min-h-min mobile:min-h-screen min-h-screen desktop:rounded-2xl tablet:rounded-2xl text-text
+                 desktop:min-w-min tablet:min-w-min mobile:min-w-screen min-w-[100vw] desktop:m-auto tablet:m-auto mobile:m-0 m-0"
           ref="dialogRef"
           @click="closeFromEvent"
   >
-    <button class="absolute w-6 h-6 right-8 top-8" @click="closeDialog">
+    <button class="absolute w-6 h-6 desktop:right-8 tablet:right-8 mobile:right-4 right-4 desktop:top-8 tablet:top-8 mobile:top-4 top-4" @click="closeDialog">
       <img class=""
            src="@/assets/img/xModal.svg"
            alt="закрыть_модальное_окно">
