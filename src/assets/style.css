@@ -5,12 +5,12 @@
 @layer basease {
     @font-face {
         font-family: 'Inter';
-        src: url(/fonts/Inter-Regular.woff2) format("opentype");
+        src: url(/public/Inter-Regular.woff2) format("opentype");
         font-weight: 400;
     }
     @font-face {
         font-family: 'Inter';
-        src: url(/fonts/Inter-SemiBold.woff2) format("opentype");
+        src: url(/public/Inter-SemiBold.woff2) format("opentype");
         font-weight: 600;
     }
 
