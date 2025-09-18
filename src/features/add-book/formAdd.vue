@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import AppButton from "@/components/app/AppButton.vue";
+import AppButton from "@/shared/ui/AppButton.vue";
 import {ref} from "vue";
-import { useSamplesStore } from "@/stores/samplesStore.ts";
+import { useBookStore } from "@/entities/book/bookStore.ts";
 
 const props = defineProps<{
   dialog: InstanceType<typeof HTMLDialogElement> | undefined
 }>();
 
-const samplesStore = useSamplesStore()
+const bookStore = useBookStore()
 const name = ref('')
 const author = ref('')
 const year = ref('')
@@ -71,20 +71,20 @@ const formSubmit = () => {
   }
 
   if (!hasError && isAgree.value) {
-    samplesStore.loadBooks()
+    bookStore.loadBooks()
 
-    const newId = Object.keys(samplesStore.books).length + 1
+    const newId = Object.keys(bookStore.books).length + 1
 
-    samplesStore.books[newId] = {
+    bookStore.books[newId] = {
       name: name.value,
       author: author.value,
       year: year.value,
       genre: genre.value
     };
 
-    localStorage.setItem('books', JSON.stringify(samplesStore.books))
+    localStorage.setItem('books', JSON.stringify(bookStore.books))
     // localStorage.clear()
-    samplesStore.loadBooks()
+    bookStore.loadBooks()
     props.dialog?.close();
 
     name.value = ''

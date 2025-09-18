@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const imgUrl = computed(
-    () => new URL(`/src/assets/img/${props.imgName}.svg`, import.meta.url).href
+    () => new URL(`/src/shared/icons/${props.imgName}.svg`, import.meta.url).href
 )
 </script>
 

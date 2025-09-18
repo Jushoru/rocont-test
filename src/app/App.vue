@@ -1,16 +1,15 @@
   <script setup lang="ts">
-  import AppButton from "@/components/app/AppButton.vue";
+  import AppButton from "@/shared/ui/AppButton.vue";
   import {ref, computed, onMounted } from "vue";
-  import DialogForm from "@/components/layouts/dialogForm.vue";
-  import FormAdd from "@/components/layouts/formAdd.vue";
-  import Books from "@/components/layouts/books.vue";
-  import { useSamplesStore } from "@/stores/samplesStore.ts";
+  import AppDialog from "@/shared/ui/AppDialog.vue";
+  import FormAdd from "@/features/add-book/formAdd.vue";
+  import BooksList from "@/pages/home/booksList.vue";
+  import { useBookStore} from "@/entities/book/bookStore.ts";
 
-  const samplesStore = useSamplesStore()
-  const dialogTarget = ref<InstanceType<typeof DialogForm>>()
+  const bookStore = useBookStore()
+  const dialogTarget = ref<InstanceType<typeof AppDialog>>()
   const screenWidth = ref(window.innerWidth)
   const isSearching = ref(false)
-
 
   const showDialog = () => dialogTarget.value?.show()
   const searchQuery = ref('');
@@ -24,13 +23,13 @@
 
   const filteredBooks = computed(() => {
     if (!searchQuery.value) {
-      return samplesStore.books;
+      return bookStore.books;
     }
 
     const query = searchQuery.value.toLowerCase();
 
     return Object.fromEntries(
-        Object.entries(samplesStore.books).filter(([, book]) => {
+        Object.entries(bookStore.books).filter(([, book]) => {
 
           type bookData = {
             name: string;
@@ -52,7 +51,7 @@
   }
 
   onMounted(() => {
-    samplesStore.loadBooks()
+    bookStore.loadBooks()
     window.addEventListener('resize', updateWidth)
     }
   )
@@ -65,15 +64,15 @@
         <div class="flex desktop:justify-center tablet:justify-center mobile:justify-center justify-between w-[280px] pb-4">
           <img v-if="!isSearching"
                class="w-[55px] h-[41px]"
-               src="../public/logo.svg"
+               src="../../public/logo.svg"
                alt="лого"
           />
           <div v-if="screenWidth >= 480 || isSearching" class="relative desktop:ml-[25px] tablet:ml-[25px] mobile:ml-[17px] ">
             <div class="absolute z-50 inset-y-0 left-0 pl-3 flex items-center">
-              <img v-if="screenWidth >= 480" class="text-accent" src="@/assets/img/search.svg" alt=""/>
+              <img v-if="screenWidth >= 480" class="text-accent" src="../shared/icons/search.svg" alt=""/>
               <img v-if="isSearching"
                    class="w-[20px] cursor-pointer"
-                   src="@/assets/img/xModal.svg"
+                   src="../shared/icons/xModal.svg"
                    alt="закрыть_поле_ввода"
                    @click="isSearching = !isSearching" />
             </div>
@@ -89,13 +88,13 @@
                   class="w-[41px] flex items-center justify-center bg-white rounded-lg cursor-pointer"
                   @click="isSearching = !isSearching"
           >
-            <img class="text-accent" src="@/assets/img/search.svg" alt=""/>
+            <img class="text-accent" src="../shared/icons/search.svg" alt=""/>
           </button>
         </div>
         <div class="flex justify-between w-full tablet:items-center">
           <div class="flex items-start w-full justify-start">
             <h1>Книги {{ searchQuery === '' ? 'в каталоге' : 'по запросу' }}</h1>
-            <h1 class="ml-2 text-accent">{{ searchQuery === '' ? samplesStore.getBookCount() : '«' + truncatedSearchQuery + '»'}}</h1>
+            <h1 class="ml-2 text-accent">{{ searchQuery === '' ? bookStore.getBookCount() : '«' + truncatedSearchQuery + '»'}}</h1>
           </div>
           <div class="min-w-[157px]" v-if="screenWidth >= 768">
             <AppButton :isAdd="true" img-name="fileAdd" text="Добавить книгу" @click="showDialog"/>
@@ -106,7 +105,7 @@
 
     <div class="relative max-w-full overflow-y-auto w-full mt-4 desktop:mb-4 tablet:mb-4 mobile:mb-14 mb-14 flex flex-col items-center">
       <div class="relative desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] w-[280px] flex flex-col items-center">
-        <Books :filtered-books="filteredBooks"/>
+        <BooksList :filtered-books="filteredBooks"/>
         <div v-if="searchQuery && Object.keys(filteredBooks).length === 0" class="w-full flex items-start">
           <p class="text-[16px] text-accent leading-5">По вашему запросу ничего не найдено</p>
         </div>
@@ -116,9 +115,9 @@
       </div>
     </div>
 
-    <DialogForm ref="dialogTarget">
+    <AppDialog ref="dialogTarget">
       <FormAdd :dialog="dialogTarget" />
-    </DialogForm>
+    </AppDialog>
   </div>
   </template>
 
@@ -126,5 +125,4 @@
   h1 {
     @apply font-semibold text-xl leading-5
   }
-
   </style>

@@ -18,7 +18,7 @@ defineProps<{
       <div class="flex justify-between items-start">
         <h4 class="desktop:max-w-[876px] tablet:max-w-[550px] mobile:max-w-[345px] max-w-[205px] mr-4 text-[16px] leading-5 break-words">{{ book.name }}</h4>
         <img class="cursor-pointer"
-             src="@/assets/img/fileEdit.svg"
+             src="../../shared/icons/fileEdit.svg"
              alt="изменить_описание_книги"
         />
       </div>

@@ -25,7 +25,7 @@ function closeFromEvent(e: Event): void {
   >
     <button class="absolute w-6 h-6 desktop:right-8 tablet:right-8 mobile:right-4 right-4 desktop:top-8 tablet:top-8 mobile:top-4 top-4" @click="closeDialog">
       <img class=""
-           src="@/assets/img/xModal.svg"
+           src="../icons/xModal.svg"
            alt="закрыть_модальное_окно">
     </button>
     <slot/>

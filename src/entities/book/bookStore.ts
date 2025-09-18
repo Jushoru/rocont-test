@@ -8,7 +8,7 @@ type bookData = {
     genre: string;
 }
 
-export const useSamplesStore = defineStore('samples', () => {
+export const useBookStore = defineStore('samples', () => {
     const books = ref<Record<string, bookData>>({});
 
     const loadBooks = () => {
@@ -22,9 +22,7 @@ export const useSamplesStore = defineStore('samples', () => {
 
     return {
         books,
-
         getBookCount,
-
         loadBooks
     }
 });
