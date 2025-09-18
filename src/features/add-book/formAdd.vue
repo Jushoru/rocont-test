@@ -2,6 +2,7 @@
 import AppButton from "@/shared/ui/AppButton.vue";
 import {ref} from "vue";
 import { useBookStore } from "@/entities/book/bookStore.ts";
+import { bookValidator } from "@/entities/book/bookValidation.ts";
 
 const props = defineProps<{
   dialog: InstanceType<typeof HTMLDialogElement> | undefined
@@ -14,63 +15,14 @@ const year = ref('')
 const genre = ref('')
 const isAgree = ref(false)
 
-const currentData = new Date()
-
-const errors = ref({
-  name: '',
-  author: '',
-  year: '',
-  genre: '',
-});
 
 const formSubmit = () => {
 
-  errors.value = {
-    name: '',
-    author: '',
-    year: '',
-    genre: '',
-  };
+  bookStore.clearErrors()
 
-  let hasError = false
+  let validation = bookValidator(name.value, author.value, genre.value, year.value, bookStore.errors)
 
-  if (!name.value.trim()) {
-    errors.value.name = 'Введите название';
-    console.log(errors.value.name)
-    hasError = true
-  } else if (name.value.length > 300) {
-    errors.value.name = 'Слишком длинное название (макс. 300 символов)';
-    hasError = true
-  }
-
-  if (!author.value.trim()) {
-    errors.value.author = 'Введите автора';
-    hasError = true
-  } else if (author.value.length > 60) {
-    errors.value.author = 'Слишком длинное имя (макс. 60 символов)';
-    hasError = true
-  }
-
-  if (!year.value.trim()) {
-    errors.value.year = 'Введите год';
-    hasError = true
-  } else if (isNaN(Number(year.value))) {
-    errors.value.year = 'Год должен быть числом';
-    hasError = true
-  } else if (Number(year.value) > currentData.getFullYear() || Number(year.value) < 1) {
-    errors.value.year = `Год должен быть в диапазоне от 1 до ${currentData.getFullYear()}`;
-    hasError = true
-  }
-
-  if (!genre.value.trim()) {
-    errors.value.genre = 'Введите жанр';
-    hasError = true
-  } else if (genre.value.length > 60) {
-    errors.value.genre = 'Слишком длинное название (макс. 60 символов)';
-    hasError = true
-  }
-
-  if (!hasError && isAgree.value) {
+  if (!validation.hasError && isAgree.value) {
     bookStore.loadBooks()
 
     const newId = Object.keys(bookStore.books).length + 1
@@ -83,7 +35,6 @@ const formSubmit = () => {
     };
 
     localStorage.setItem('books', JSON.stringify(bookStore.books))
-    // localStorage.clear()
     bookStore.loadBooks()
     props.dialog?.close();
 
@@ -93,11 +44,13 @@ const formSubmit = () => {
     genre.value = ''
 
     isAgree.value = false
+  } else {
+    bookStore.setErrors(validation.newErrors)
   }
 };
 
-const clearError = (field: keyof typeof errors.value) => {
-  errors.value[field] = '';
+const clearError = (field: keyof typeof bookStore.errors) => {
+  bookStore.errors[field] = '';
 };
 
 </script>
@@ -112,52 +65,52 @@ const clearError = (field: keyof typeof errors.value) => {
           Название
         </label>
         <input class="formInput"
-               :class="errors.name ? 'outline outline-red outline-2' : ''"
+               :class="bookStore.errors.name ? 'outline outline-red outline-2' : ''"
                v-model="name"
                type="text"
                placeholder="Название произведения"
                @focusin="clearError('name')"
         />
-        <span v-if="errors.name" class="inputError ml-3">{{errors.name}}</span>
+        <span v-if="bookStore.errors.name" class="inputError ml-3">{{bookStore.errors.name}}</span>
       </div>
       <div class="mb-2">
         <label class="inputLabel">
           Автор
         </label>
         <input class="formInput"
-               :class="errors.author ? 'outline outline-red outline-2' : ''"
+               :class="bookStore.errors.author ? 'outline outline-red outline-2' : ''"
                v-model="author"
                type="text"
                placeholder="Название произведения"
                @focusin="clearError('author')"
         />
-        <span v-if="errors.author" class="inputError ml-3">{{errors.author}}</span>
+        <span v-if="bookStore.errors.author" class="inputError ml-3">{{bookStore.errors.author}}</span>
       </div>
       <div class="mb-2">
         <label class="inputLabel">
           Год
         </label>
         <input class="formInput"
-               :class="errors.year ? 'outline outline-red outline-2' : ''"
+               :class="bookStore.errors.year ? 'outline outline-red outline-2' : ''"
                v-model="year"
                type="text"
                placeholder="Название произведения"
                @focusin="clearError('year')"
         />
-        <span v-if="errors.year" class="inputError ml-3">{{errors.year}}</span>
+        <span v-if="bookStore.errors.year" class="inputError ml-3">{{bookStore.errors.year}}</span>
       </div>
       <div class="mb-4">
         <label class="inputLabel">
           Жанр
         </label>
         <input class="formInput"
-               :class="errors.genre ? 'outline outline-red outline-2' : ''"
+               :class="bookStore.errors.genre ? 'outline outline-red outline-2' : ''"
                v-model="genre"
                type="text"
                placeholder="Название произведения"
                @focusin="clearError('genre')"
         />
-        <span v-if="errors.genre" class="inputError ml-3">{{errors.genre}}</span>
+        <span v-if="bookStore.errors.genre" class="inputError ml-3">{{bookStore.errors.genre}}</span>
       </div>
 
       <div class="flex items-center mb-4">
