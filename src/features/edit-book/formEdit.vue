@@ -116,7 +116,7 @@ const clearError = (field: keyof typeof bookStore.errors) => {
       </div>
 
       <div class="ml-auto desktop:w-[114px] tablet:w-[114px] mobile:w-full w-full">
-        <AppButton :is-add="true" img-name="fileAdd" text="Сохранить" @btn-click="formSubmit" />
+        <AppButton :is-add="true" img-name="fileCheck" text="Сохранить" @btn-click="formSubmit" />
       </div>
     </form>
   </div>

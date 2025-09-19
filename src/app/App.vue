@@ -37,10 +37,17 @@
     );
   });
 
+  let lastWidth = window.innerWidth
+
   const updateWidth = () => {
-    screenWidth.value = window.innerWidth
-    if (screenWidth.value > 320) {
-      isSearching.value = false;
+    const newWidth = window.innerWidth
+    if (newWidth !== lastWidth) {
+      screenWidth.value = newWidth
+      lastWidth = newWidth
+
+      if (screenWidth.value >= 320) {
+        isSearching.value = false
+      }
     }
   }
 

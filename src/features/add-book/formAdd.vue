@@ -57,7 +57,7 @@ const clearError = (field: keyof typeof bookStore.errors) => {
 </script>
 
 <template>
-  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white mx-auto  ">
+  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white mx-auto">
     <h1 class="">Добавить книгу</h1>
     <p class="mt-2 text-pretty">Заполните все поля и добавьте книгу в список</p>
     <form class="w-full mt-4">
