@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import AppButton from "@/shared/ui/AppButton.vue";
 import {ref} from "vue";
-import { useBookStore } from "@/entities/book/bookStore.ts";
-import { bookValidator } from "@/entities/book/bookValidation.ts";
+import { useBookStore } from "@/entities/book/bookStore";
+import { bookValidator } from "@/entities/book/bookValidation";
+import AppDialog from "@/shared/ui/AppDialog.vue";
 
 const props = defineProps<{
-  dialog: InstanceType<typeof HTMLDialogElement> | undefined
+  dialog: InstanceType<typeof AppDialog> | undefined
 }>();
 
 const bookStore = useBookStore()
@@ -56,7 +57,7 @@ const clearError = (field: keyof typeof bookStore.errors) => {
 </script>
 
 <template>
-  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white desktop:m-8 tablet:m-8 mx-auto my-5">
+  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white">
     <h1 class="">Добавить книгу</h1>
     <p class="mt-2 text-pretty">Заполните все поля и добавьте книгу в список</p>
     <form class="w-full mt-4">

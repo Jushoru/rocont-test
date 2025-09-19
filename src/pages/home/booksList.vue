@@ -1,14 +1,27 @@
 <script setup lang="ts">
-type bookData = {
-  name: string;
-  author: string;
-  year: string;
-  genre: string;
-}
+import {ref} from "vue";
+import AppDialog from "@/shared/ui/AppDialog.vue";
+import FormEdit from "@/features/edit-book/formEdit.vue";
+import {type bookData} from "@/entities/book/bookTypes";
 
 defineProps<{
   filteredBooks: Record<string, bookData>;
 }>()
+
+const editedBook = ref<bookData>({
+  name: '',
+  author: '',
+  genre: '',
+  year: '',
+});
+const editedBookId = ref<string>('');
+const dialogTarget = ref<InstanceType<typeof AppDialog>>()
+
+const showDialog = (book: bookData, id: string) => {
+  editedBook.value = book;
+  editedBookId.value = id;
+  dialogTarget.value?.show()
+}
 
 </script>
 
@@ -20,6 +33,7 @@ defineProps<{
         <img class="cursor-pointer"
              src="../../shared/icons/fileEdit.svg"
              alt="изменить_описание_книги"
+             @click="showDialog(book, id)"
         />
       </div>
       <div class="flex mt-2">
@@ -29,6 +43,10 @@ defineProps<{
       </div>
     </li>
   </ul>
+
+  <AppDialog ref="dialogTarget">
+    <FormEdit :dialog="dialogTarget" :bookData="editedBook" :id="editedBookId"/>
+  </AppDialog>
 </template>
 
 <style scoped>

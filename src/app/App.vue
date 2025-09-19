@@ -5,6 +5,7 @@
   import FormAdd from "@/features/add-book/formAdd.vue";
   import BooksList from "@/pages/home/booksList.vue";
   import { useBookStore} from "@/entities/book/bookStore.ts";
+  import { type bookData } from "@/entities/book/bookTypes.ts";
 
   const bookStore = useBookStore()
   const dialogTarget = ref<InstanceType<typeof AppDialog>>()
@@ -30,13 +31,6 @@
 
     return Object.fromEntries(
         Object.entries(bookStore.books).filter(([, book]) => {
-
-          type bookData = {
-            name: string;
-            author: string;
-            year: string;
-            genre: string;
-          }
           const typedBook = book as bookData;
           return typedBook.name.toLowerCase().includes(query);
         })
