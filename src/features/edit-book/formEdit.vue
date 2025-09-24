@@ -5,7 +5,7 @@ import {ref, watch} from "vue";
 import { useBookStore } from "@/entities/book/bookStore";
 import { bookValidator } from "@/entities/book/bookValidation";
 import {type bookData } from "@/entities/book/bookTypes";
-import AppButtonSimple from "@/shared/ui/AppButtonSimple.vue";
+import AppConfirmationDialog from "@/shared/ui/AppConfirmationDialog.vue";
 
 const props = defineProps<{
   dialog: InstanceType<typeof AppDialog> | undefined;
@@ -67,7 +67,8 @@ const deleteBook = () => {
 </script>
 
 <template>
-  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white mx-auto">
+  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white mx-auto"
+  >
     <h1 class="">Изменение книги</h1>
     <p class="mt-2 text-pretty">Вы можете изменить поля уже созданной книги</p>
     <form class="w-full mt-4">
@@ -142,18 +143,11 @@ const deleteBook = () => {
     </form>
   </div>
   <AppDialog ref="dialogDeleteTarget">
-    <div class="desktop:w-[400px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white mx-auto">
-      <h1 class="max-w-[93%]">Удалить книгу "{{ name }}"</h1>
-      <p class="mt-2 text-pretty">Вы уверены что хотите удалить эту книгу?</p>
-      <div class="mt-4 flex justify-end gap-2">
-        <div class="w-[80px]">
-          <AppButtonSimple :is-red="false" text="Нет" @btn-click="dialogDeleteTarget?.close()"/>
-        </div>
-        <div class="w-[80px]">
-          <AppButtonSimple :is-red="true" text="Да" @btn-click="deleteBook()"/>
-        </div>
-      </div>
-    </div>
+    <AppConfirmationDialog :title="`Удалить книгу «${name}»`"
+                           message="Вы уверены что хотите удалить эту книгу?"
+                           @reject-click="dialogDeleteTarget?.close()"
+                           @accept-click="deleteBook()"
+    />
   </AppDialog>
 </template>
 

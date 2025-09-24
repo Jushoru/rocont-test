@@ -10,7 +10,7 @@ defineProps<{
   <button class="w-full h-[32px] rounded-lg flex items-center justify-center text-[14px] leading-5 text-white group"
           :class="isRed ?
           'bg-red hover:bg-redHover' :
-          'bg-[#F7F8FA] hover:bg-[#E1E7EF]'"
+          'bg-[#E1E7EF] hover:bg-[#eaeef4]'"
           type="button"
           @click="$emit('btnClick')"
   >
