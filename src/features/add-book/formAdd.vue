@@ -16,15 +16,14 @@ const year = ref('')
 const genre = ref('')
 const isAgree = ref(false)
 
+// TODO: пересмотреть концепцию id, поскольку сейчас есть вероятность создания кинг с одинаковым айди
 
 const formSubmit = () => {
-
   bookStore.clearErrors()
 
   let validation = bookValidator(name.value, author.value, genre.value, year.value, bookStore.errors)
 
   if (!validation.hasError && isAgree.value) {
-    bookStore.loadBooks()
 
     const newId = Object.keys(bookStore.books).length + 1
 
@@ -35,8 +34,7 @@ const formSubmit = () => {
       genre: genre.value
     };
 
-    localStorage.setItem('books', JSON.stringify(bookStore.books))
-    bookStore.loadBooks()
+    bookStore.setBooks()
     props.dialog?.close();
 
     name.value = ''

@@ -8,6 +8,7 @@ defineProps<{
   filteredBooks: Record<string, bookData>;
 }>()
 
+// TODO: не нравится мне подобное определение editedBook
 const editedBook = ref<bookData>({
   name: '',
   author: '',
@@ -15,12 +16,12 @@ const editedBook = ref<bookData>({
   year: '',
 });
 const editedBookId = ref<string>('');
-const dialogTarget = ref<InstanceType<typeof AppDialog>>()
+const dialogEditTarget = ref<InstanceType<typeof AppDialog>>()
 
-const showDialog = (book: bookData, id: string) => {
+const showEditDialog = (book: bookData, id: string) => {
   editedBook.value = book;
   editedBookId.value = id;
-  dialogTarget.value?.show()
+  dialogEditTarget.value?.show()
 }
 
 </script>
@@ -33,7 +34,7 @@ const showDialog = (book: bookData, id: string) => {
         <img class="cursor-pointer"
              src="../../shared/icons/fileEdit.svg"
              alt="изменить_описание_книги"
-             @click="showDialog(book, id)"
+             @click="showEditDialog(book, id)"
         />
       </div>
       <div class="flex mt-2">
@@ -43,14 +44,17 @@ const showDialog = (book: bookData, id: string) => {
       </div>
     </li>
   </ul>
-
-  <AppDialog ref="dialogTarget">
-    <FormEdit :dialog="dialogTarget" :bookData="editedBook" :id="editedBookId"/>
+  <AppDialog ref="dialogEditTarget">
+    <FormEdit :dialog="dialogEditTarget" :bookData="editedBook" :id="editedBookId"/>
   </AppDialog>
 </template>
 
 <style scoped>
 p {
   @apply font-normal text-sm leading-5 text-accent break-words
+}
+
+h1 {
+  @apply font-semibold text-xl leading-5
 }
 </style>

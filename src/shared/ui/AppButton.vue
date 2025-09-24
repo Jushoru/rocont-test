@@ -3,7 +3,7 @@ import {computed} from "vue";
 
 const props = defineProps<{
   isAdd: boolean;
-  imgName: string;
+  imgName?: string;
   text: string;
 }>()
 
@@ -13,7 +13,6 @@ const imgUrl = computed(
 </script>
 
 <template>
-
   <button class="w-full h-[41px] rounded-lg flex items-center justify-center text-[14px] leading-5 text-white group"
           :class="isAdd ?
           'bg-green hover:bg-greenHover' :

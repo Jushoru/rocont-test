@@ -1,5 +1,5 @@
 import {defineStore} from "pinia"
-import { ref } from "vue";
+import {ref} from "vue";
 import type {bookFields, bookData} from "./bookTypes";
 
 export const useBookStore = defineStore('samples', () => {
@@ -11,7 +11,7 @@ export const useBookStore = defineStore('samples', () => {
         genre: '',
     });
 
-    const loadBooks = () => {
+    const getBooks = () => {
         const storedBooks = localStorage.getItem('books');
         books.value = storedBooks ? JSON.parse(storedBooks) : {};
     };
@@ -29,6 +29,16 @@ export const useBookStore = defineStore('samples', () => {
         return Object.keys(books.value).length;
     };
 
+    const setBooks = () => {
+        localStorage.setItem('books', JSON.stringify(books.value))
+        getBooks();
+    }
+
+    const deleteBook = async (id: string) => {
+        delete books.value[id];
+        setBooks();
+    }
+
     const setErrors = (newErrors: Record<bookFields, string>) => {
         errors.value = newErrors
     };
@@ -37,8 +47,10 @@ export const useBookStore = defineStore('samples', () => {
         books,
         errors,
         getBookCount,
+        setBooks,
+        deleteBook,
         clearErrors,
-        loadBooks,
+        getBooks,
         setErrors,
     }
 });

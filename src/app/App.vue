@@ -52,7 +52,7 @@
   }
 
   onMounted(() => {
-    bookStore.loadBooks()
+    bookStore.getBooks()
     window.addEventListener('resize', updateWidth)
     }
   )

@@ -5,12 +5,15 @@ import {ref, watch} from "vue";
 import { useBookStore } from "@/entities/book/bookStore";
 import { bookValidator } from "@/entities/book/bookValidation";
 import {type bookData } from "@/entities/book/bookTypes";
+import AppButtonSimple from "@/shared/ui/AppButtonSimple.vue";
 
 const props = defineProps<{
   dialog: InstanceType<typeof AppDialog> | undefined;
   bookData: bookData;
   id: string;
 }>();
+
+const dialogDeleteTarget = ref<InstanceType<typeof AppDialog>>()
 
 const bookStore = useBookStore()
 const name = ref(props.bookData.name)
@@ -26,13 +29,11 @@ watch(() => props.bookData, (newBook) => {
 }, { immediate: true, deep: true })
 
 const formSubmit = () => {
-
   bookStore.clearErrors()
 
   let validation = bookValidator(name.value, author.value, genre.value, year.value, bookStore.errors)
 
   if (!validation.hasError) {
-    bookStore.loadBooks()
 
     const newId = props.id
 
@@ -43,8 +44,7 @@ const formSubmit = () => {
       genre: genre.value
     };
 
-    localStorage.setItem('books', JSON.stringify(bookStore.books))
-    bookStore.loadBooks()
+    bookStore.setBooks()
     props.dialog?.close();
   } else {
     bookStore.setErrors(validation.newErrors)
@@ -55,11 +55,20 @@ const clearError = (field: keyof typeof bookStore.errors) => {
   bookStore.errors[field] = '';
 };
 
+const showDeleteDialog = () => {
+  dialogDeleteTarget.value?.show()
+}
+
+const deleteBook = () => {
+  bookStore.deleteBook(props.id)
+  dialogDeleteTarget.value?.close();
+  props.dialog?.close()
+}
 </script>
 
 <template>
   <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white mx-auto">
-    <h1 class="">Изменение</h1>
+    <h1 class="">Изменение книги</h1>
     <p class="mt-2 text-pretty">Вы можете изменить поля уже созданной книги</p>
     <form class="w-full mt-4">
       <div class="mb-2">
@@ -115,11 +124,37 @@ const clearError = (field: keyof typeof bookStore.errors) => {
         <span v-if="bookStore.errors.genre" class="inputError ml-3">{{bookStore.errors.genre}}</span>
       </div>
 
-      <div class="ml-auto desktop:w-[114px] tablet:w-[114px] mobile:w-full w-full">
-        <AppButton :is-add="true" img-name="fileCheck" text="Сохранить" @btn-click="formSubmit" />
+      <div class="flex justify-end gap-2">
+        <div class="ml-auto desktop:w-[114px] tablet:w-[114px] mobile:w-full w-full">
+          <AppButton :is-add="true" img-name="fileCheck" text="Сохранить" @btn-click="formSubmit" />
+        </div>
+        
+        <div class="w-[41px] bg-[#F7F8FA] rounded-[8px] flex items-center justify-center hover:bg-[#E1E7EF]
+                    cursor-pointer"
+             @click="showDeleteDialog()"
+        >
+          <img src="../../shared/icons/trash.svg"
+               alt="удалить_книгу"
+               width="20px"
+          />
+        </div>
       </div>
     </form>
   </div>
+  <AppDialog ref="dialogDeleteTarget">
+    <div class="desktop:w-[400px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white mx-auto">
+      <h1 class="max-w-[93%]">Удалить книгу "{{ name }}"</h1>
+      <p class="mt-2 text-pretty">Вы уверены что хотите удалить эту книгу?</p>
+      <div class="mt-4 flex justify-end gap-2">
+        <div class="w-[80px]">
+          <AppButtonSimple :is-red="false" text="Нет" @btn-click="dialogDeleteTarget?.close()"/>
+        </div>
+        <div class="w-[80px]">
+          <AppButtonSimple :is-red="true" text="Да" @btn-click="deleteBook()"/>
+        </div>
+      </div>
+    </div>
+  </AppDialog>
 </template>
 
 <style scoped>
