@@ -41,7 +41,6 @@ function closeFromEvent(e: Event): void {
 dialog::before,
 dialog::after {
   content: none;
-  padding: 0
-
+  padding: 0;
 }
 </style>

@@ -8,7 +8,6 @@ defineProps<{
   filteredBooks: Record<string, bookData>;
 }>()
 
-// TODO: не нравится мне подобное определение editedBook
 const editedBook = ref<bookData>({
   name: '',
   author: '',

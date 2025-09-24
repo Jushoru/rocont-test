@@ -16,8 +16,6 @@ const year = ref('')
 const genre = ref('')
 const isAgree = ref(false)
 
-// TODO: пересмотреть концепцию id, поскольку сейчас есть вероятность создания кинг с одинаковым айди
-
 const formSubmit = () => {
   bookStore.clearErrors()
 
@@ -25,7 +23,7 @@ const formSubmit = () => {
 
   if (!validation.hasError && isAgree.value) {
 
-    const newId = Object.keys(bookStore.books).length + 1
+    const newId = bookStore.getNewID()
 
     bookStore.books[newId] = {
       name: name.value,

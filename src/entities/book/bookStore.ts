@@ -1,6 +1,7 @@
 import {defineStore} from "pinia"
 import {ref} from "vue";
 import type {bookFields, bookData} from "./bookTypes";
+import { v4 as uuidv4 } from "uuid";
 
 export const useBookStore = defineStore('samples', () => {
     const books = ref<Record<string, bookData>>({});
@@ -43,6 +44,10 @@ export const useBookStore = defineStore('samples', () => {
         errors.value = newErrors
     };
 
+    const getNewID = (): string => {
+        return uuidv4();
+    }
+
     return {
         books,
         errors,
@@ -52,5 +57,6 @@ export const useBookStore = defineStore('samples', () => {
         clearErrors,
         getBooks,
         setErrors,
+        getNewID,
     }
 });
