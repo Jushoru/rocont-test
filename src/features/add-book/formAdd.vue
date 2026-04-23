@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import AppButton from "@/shared/ui/AppButton.vue";
+import AppButton from "@/components/AppButton.vue";
 import {ref} from "vue";
 import { useBookStore } from "@/entities/book/bookStore";
 import { bookValidator } from "@/entities/book/bookValidation";
-import AppDialog from "@/shared/ui/AppDialog.vue";
+import AppDialog from "@/components/AppDialog.vue";
 
 const props = defineProps<{
   dialog: InstanceType<typeof AppDialog> | undefined

@@ -1,81 +1,92 @@
-  <script setup lang="ts">
-  import AppButton from "@/shared/ui/AppButton.vue";
-  import {ref, computed, onMounted } from "vue";
-  import AppDialog from "@/shared/ui/AppDialog.vue";
-  import FormAdd from "@/features/add-book/formAdd.vue";
-  import BooksList from "@/pages/home/booksList.vue";
-  import { useBookStore} from "@/entities/book/bookStore.ts";
-  import { type bookData } from "@/entities/book/bookTypes.ts";
+<script setup lang="ts">
+import AppButton from "@/components/AppButton.vue";
+import {ref, computed, onMounted } from "vue";
+import AppDialog from "@/components/AppDialog.vue";
+import FormAdd from "@/features/add-book/formAdd.vue";
+import BooksList from "@/widgets/booksList.vue";
+import { useBookStore} from "@/entities/book/bookStore.ts";
+import { type bookData } from "@/entities/book/bookTypes.ts";
 
-  const bookStore = useBookStore()
-  const dialogTarget = ref<InstanceType<typeof AppDialog>>()
-  const screenWidth = ref(window.innerWidth)
-  const isSearching = ref(false)
+const bookStore = useBookStore()
+const dialogTarget = ref<InstanceType<typeof AppDialog>>()
+const screenWidth = ref(window.innerWidth)
+const isSearching = ref(false)
 
-  const showDialog = () => dialogTarget.value?.show()
-  const searchQuery = ref('');
+const showDialog = () => dialogTarget.value?.show()
+const searchQuery = ref('');
 
-  const truncatedSearchQuery = computed(() => {
-    const maxLength = 20;
-    return searchQuery.value.length > maxLength
-        ? searchQuery.value.slice(0, maxLength) + '...'
-        : searchQuery.value;
-  });
+const truncatedSearchQuery = computed(() => {
+  const maxLength = 20;
+  return searchQuery.value.length > maxLength
+      ? searchQuery.value.slice(0, maxLength) + '...'
+      : searchQuery.value;
+});
 
-  const filteredBooks = computed(() => {
-    if (!searchQuery.value) {
-      return bookStore.books;
-    }
-
-    const query = searchQuery.value.toLowerCase();
-
-    return Object.fromEntries(
-        Object.entries(bookStore.books).filter(([, book]) => {
-          const typedBook = book as bookData;
-          return typedBook.name.toLowerCase().includes(query);
-        })
-    );
-  });
-
-  let lastWidth = window.innerWidth
-
-  const updateWidth = () => {
-    const newWidth = window.innerWidth
-    if (newWidth !== lastWidth) {
-      screenWidth.value = newWidth
-      lastWidth = newWidth
-
-      if (screenWidth.value >= 320) {
-        isSearching.value = false
-      }
-    }
+const filteredBooks = computed(() => {
+  if (!searchQuery.value) {
+    return bookStore.books;
   }
 
-  onMounted(() => {
-    bookStore.getBooks()
-    window.addEventListener('resize', updateWidth)
-    }
-  )
-  </script>
+  const query = searchQuery.value.toLowerCase();
 
-  <template>
-  <div class="h-screen w-full flex flex-col">
+  return Object.fromEntries(
+      Object.entries(bookStore.books).filter(([, book]) => {
+        const typedBook = book as bookData;
+        return typedBook.name.toLowerCase().includes(query);
+      })
+  );
+});
+
+let lastWidth = window.innerWidth
+
+const updateWidth = () => {
+  const newWidth = window.innerWidth
+  if (newWidth !== lastWidth) {
+    screenWidth.value = newWidth
+    lastWidth = newWidth
+
+    if (screenWidth.value >= 320) {
+      isSearching.value = false
+    }
+  }
+}
+
+onMounted(() => {
+      bookStore.getBooks()
+      window.addEventListener('resize', updateWidth)
+    }
+)
+</script>
+
+<template>
+  <div class="w-full">
     <div class="w-full py-4 flex flex-col items-center bg-layer">
       <div class="desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] flex w-[280px] flex-col justify-center items-center">
         <div class="flex desktop:justify-center tablet:justify-center mobile:justify-center justify-between w-[280px] pb-4">
           <img v-if="!isSearching"
                class="w-[55px] h-[41px]"
                src="../../public/logo.svg"
-               alt="лого"
+               alt="Логотип"
           />
           <div v-if="screenWidth >= 480 || isSearching" class="relative desktop:ml-[25px] tablet:ml-[25px] mobile:ml-[17px] ">
             <div class="absolute z-50 inset-y-0 left-0 pl-3 flex items-center">
-              <img v-if="screenWidth >= 480" class="text-accent" src="../shared/icons/search.svg" alt=""/>
-              <img v-if="isSearching"
-                   class="w-[20px] cursor-pointer"
-                   src="../shared/icons/xModal.svg"
-                   alt="закрыть_поле_ввода"
-                   @click="isSearching = !isSearching" />
+              <svg
+                  v-if="screenWidth >= 480"
+                  class="text-accent w-[20px] h-[20px]"
+                  aria-hidden="true"
+              >
+                <use :href="'/sprite.svg#search'" />
+              </svg>
+              <button
+                  v-if="isSearching"
+                  class="cursor-pointer"
+                  aria-label="Закрыть поле ввода"
+                  @click="isSearching = !isSearching"
+              >
+                <svg class="w-[24px] h-[24px]" aria-hidden="true" >
+                  <use :href="'/sprite.svg#xModal'" />
+                </svg>
+              </button>
             </div>
             <input v-if="isSearching || screenWidth >= 480"
                    class="relative z-0 desktop:w-[864px] tablet:w-[544px] mobile:w-[352px] w-[280px] h-[41px] pl-[36px]
@@ -89,7 +100,9 @@
                   class="w-[41px] flex items-center justify-center bg-white rounded-lg cursor-pointer"
                   @click="isSearching = !isSearching"
           >
-            <img class="text-accent" src="../shared/icons/search.svg" alt=""/>
+            <svg class="w-[20px] h-[20px] text-accent">
+              <use :href="'/sprite.svg#search'" />
+            </svg>
           </button>
         </div>
         <div class="flex justify-between w-full tablet:items-center">
@@ -120,10 +133,10 @@
       <FormAdd :dialog="dialogTarget" />
     </AppDialog>
   </div>
-  </template>
+</template>
 
-  <style scoped>
-  h1 {
-    @apply font-semibold text-xl leading-5
-  }
-  </style>
+<style scoped>
+h1 {
+  @apply font-semibold text-xl leading-5
+}
+</style>

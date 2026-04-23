@@ -29,9 +29,9 @@ function closeFromEvent(e: Event): void {
                      mobile:top-4 top-4"
               @click="closeDialog"
       >
-        <img class=""
-             src="../icons/xModal.svg"
-             alt="закрыть_модальное_окно">
+        <svg class="w-[24px] h-[24px]" aria-hidden="true" >
+          <use :href="'/sprite.svg#xModal'" />
+        </svg>
       </button>
       <slot/>
     </div>

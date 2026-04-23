@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const imgUrl = computed(
-    () => new URL(`/src/shared/icons/${props.imgName}.svg`, import.meta.url).href
+    () => props.imgName
 )
 </script>
 
@@ -20,9 +20,12 @@ const imgUrl = computed(
           type="button"
           @click="$emit('btnClick')"
   >
-    <img class="w-[20px] h-[20px] mr-[0.5px] opacity-50 group-hover:opacity-100"
-         :alt="`кнопка `+text"
-         :src="imgUrl"/>
+    <svg class="w-[20px] h-[20px] mr-[0.5px] opacity-50 group-hover:opacity-100"
+         :aria-label="`кнопка ${text}`"
+    >
+      <use :href="`/sprite.svg#${imgUrl}`" />
+    </svg>
+
     <span class="ml-1">{{ text }}</span>
   </button>
 </template>

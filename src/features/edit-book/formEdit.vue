@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import AppButton from "@/shared/ui/AppButton.vue";
-import AppDialog from "@/shared/ui/AppDialog.vue";
+import AppButton from "@/components/AppButton.vue";
+import AppDialog from "@/components/AppDialog.vue";
 import {ref, watch} from "vue";
 import { useBookStore } from "@/entities/book/bookStore";
 import { bookValidator } from "@/entities/book/bookValidation";
 import {type bookData } from "@/entities/book/bookTypes";
-import AppConfirmationDialog from "@/shared/ui/AppConfirmationDialog.vue";
+import AppConfirmationDialog from "@/components/AppConfirmationDialog.vue";
 
 const props = defineProps<{
   dialog: InstanceType<typeof AppDialog> | undefined;
@@ -134,10 +134,9 @@ const deleteBook = () => {
                     cursor-pointer"
              @click="showDeleteDialog()"
         >
-          <img src="../../shared/icons/trash.svg"
-               alt="удалить_книгу"
-               width="20px"
-          />
+          <svg class="w-[20px] h-[20px]" aria-label="удалить книгу">
+            <use :href="'/sprite.svg#trash'" />
+          </svg>
         </div>
       </div>
     </form>

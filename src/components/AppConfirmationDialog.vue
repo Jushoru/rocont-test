@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppButtonSimple from "@/shared/ui/AppButtonSimple.vue";
+import AppButtonSimple from "@/components/AppButtonSimple.vue";
 
 defineProps<{
   title: string;

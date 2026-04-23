@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import AppDialog from "@/shared/ui/AppDialog.vue";
+import AppDialog from "@/components/AppDialog.vue";
 import FormEdit from "@/features/edit-book/formEdit.vue";
-import {type bookData} from "@/entities/book/bookTypes";
+import {type bookData} from "@/entities/book/bookTypes.ts";
 
 defineProps<{
   filteredBooks: Record<string, bookData>;
@@ -30,11 +30,9 @@ const showEditDialog = (book: bookData, id: string) => {
     <li class="p-4 mb-4 border-2 border-layer rounded-2xl hover:bg-layer" v-for="(book, id) in filteredBooks" :key="id">
       <div class="flex justify-between items-start">
         <h4 class="desktop:max-w-[876px] tablet:max-w-[550px] mobile:max-w-[345px] max-w-[205px] mr-4 text-[16px] leading-5 break-words">{{ book.name }}</h4>
-        <img class="cursor-pointer"
-             src="../../shared/icons/fileEdit.svg"
-             alt="изменить_описание_книги"
-             @click="showEditDialog(book, id)"
-        />
+        <svg class="cursor-pointer w-[20px] h-[20px]" aria-hidden="true" @click="showEditDialog(book, id)">
+          <use :href="'/sprite.svg#fileEdit'" />
+        </svg>
       </div>
       <div class="flex mt-2">
         <p class="max-w-[41%]">{{ book.author }}</p>

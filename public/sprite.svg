@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+    <symbol id="checkbox" viewBox="0 0 24 24" fill="none">
+        <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" fill="#1C7D41" stroke="#1C7D41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 14L11 16L16 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="fileAdd" viewBox="0 0 20 21" fill="none">
+        <g>
+            <path d="M3.33331 18.8332H15C15.442 18.8332 15.8659 18.6576 16.1785 18.345C16.4911 18.0325 16.6666 17.6085 16.6666 17.1665V6.74984L12.0833 2.1665H4.99998C4.55795 2.1665 4.13403 2.3421 3.82147 2.65466C3.50891 2.96722 3.33331 3.39114 3.33331 3.83317V7.1665" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.6667 2.1665V7.1665H16.6667" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2.5 13H7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 10.5V15.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+    </symbol>
+    <symbol id="fileCheck" viewBox="0 0 24 24" fill="none">
+        <path d="M4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V7.5L14.5 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 2V8H20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 15L5 17L9 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="fileEdit" viewBox="0 0 20 20" fill="none">
+        <path d="M3.33337 11.25V3.33332C3.33337 2.8913 3.50897 2.46737 3.82153 2.15481C4.13409 1.84225 4.55801 1.66666 5.00004 1.66666H12.0834L16.6667 6.24999V16.6667C16.6667 17.1087 16.4911 17.5326 16.1786 17.8452C15.866 18.1577 15.4421 18.3333 15 18.3333H10.4167" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11.6666 1.66666V6.66666H16.6666" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8.68337 10.5083C8.84589 10.3458 9.03881 10.2169 9.25114 10.129C9.46348 10.041 9.69105 9.99576 9.92087 9.99576C10.1507 9.99576 10.3783 10.041 10.5906 10.129C10.8029 10.2169 10.9959 10.3458 11.1584 10.5083C11.3209 10.6709 11.4498 10.8638 11.5377 11.0761C11.6257 11.2884 11.671 11.516 11.671 11.7458C11.671 11.9757 11.6257 12.2032 11.5377 12.4156C11.4498 12.6279 11.3209 12.8208 11.1584 12.9833L6.62504 17.5L3.33337 18.3333L4.15837 15.0417L8.68337 10.5083Z" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="fileX" viewBox="0 0 24 24" fill="none">
+        <path d="M4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V7.5L14.5 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 2V8H20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 12.5L8 17.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 12.5L3 17.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="search" viewBox="0 0 20 21" fill="none">
+        <path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M17.5 18L13.875 14.375" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="trash" viewBox="0 0 24 24" fill="none">
+        <path d="M3 6H21" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 11V17" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 11V17" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="x" viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="xModal" viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 6L18 18" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+</svg>
