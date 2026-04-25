@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {spriteHref} from "@/utils/spriteHref.ts";
 
 const dialogRef = ref<HTMLDialogElement | null>(null);
 const showDialog = () => dialogRef.value?.showModal();
@@ -30,7 +31,7 @@ function closeFromEvent(e: Event): void {
               @click="closeDialog"
       >
         <svg class="w-[24px] h-[24px]" aria-hidden="true" >
-          <use :href="'/sprite.svg#xModal'" />
+          <use :href="spriteHref('xModal')" />
         </svg>
       </button>
       <slot/>

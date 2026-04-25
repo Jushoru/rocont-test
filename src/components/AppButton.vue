@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
+import {spriteHref} from "@/utils/spriteHref.ts";
 
 const props = defineProps<{
   isAdd: boolean;
@@ -23,7 +24,7 @@ const imgUrl = computed(
     <svg class="w-[20px] h-[20px] mr-[0.5px] opacity-50 group-hover:opacity-100"
          :aria-label="`кнопка ${text}`"
     >
-      <use :href="`/sprite.svg#${imgUrl}`" />
+      <use :href="spriteHref(imgUrl)" />
     </svg>
 
     <span class="ml-1">{{ text }}</span>

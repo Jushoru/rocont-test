@@ -1,0 +1,1 @@
+export const spriteHref = (id: string) => `${import.meta.env.BASE_URL}/sprite.svg#${id}`

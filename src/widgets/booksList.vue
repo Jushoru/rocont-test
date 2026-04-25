@@ -3,6 +3,7 @@ import {ref} from "vue";
 import AppDialog from "@/components/AppDialog.vue";
 import FormEdit from "@/features/edit-book/formEdit.vue";
 import {type bookData} from "@/entities/book/bookTypes.ts";
+import {spriteHref} from "@/utils/spriteHref.ts";
 
 defineProps<{
   filteredBooks: Record<string, bookData>;
@@ -31,7 +32,7 @@ const showEditDialog = (book: bookData, id: string) => {
       <div class="flex justify-between items-start">
         <h4 class="desktop:max-w-[876px] tablet:max-w-[550px] mobile:max-w-[345px] max-w-[205px] mr-4 text-[16px] leading-5 break-words">{{ book.name }}</h4>
         <svg class="cursor-pointer w-[20px] h-[20px]" aria-hidden="true" @click="showEditDialog(book, id)">
-          <use :href="'/sprite.svg#fileEdit'" />
+          <use :href="spriteHref('fileEdit')" />
         </svg>
       </div>
       <div class="flex mt-2">

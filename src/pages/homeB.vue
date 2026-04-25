@@ -6,6 +6,7 @@ import FormAdd from "@/features/add-book/formAdd.vue";
 import BooksList from "@/widgets/booksList.vue";
 import { useBookStore} from "@/entities/book/bookStore.ts";
 import { type bookData } from "@/entities/book/bookTypes.ts";
+import {spriteHref} from "@/utils/spriteHref.ts";
 
 const bookStore = useBookStore()
 const dialogTarget = ref<InstanceType<typeof AppDialog>>()
@@ -75,7 +76,7 @@ onMounted(() => {
                   class="text-accent w-[20px] h-[20px]"
                   aria-hidden="true"
               >
-                <use :href="'/sprite.svg#search'" />
+                <use :href="spriteHref('search')" />
               </svg>
               <button
                   v-if="isSearching"
@@ -84,7 +85,7 @@ onMounted(() => {
                   @click="isSearching = !isSearching"
               >
                 <svg class="w-[24px] h-[24px]" aria-hidden="true" >
-                  <use :href="'/sprite.svg#xModal'" />
+                  <use :href="spriteHref('xModal')" />
                 </svg>
               </button>
             </div>
@@ -101,7 +102,7 @@ onMounted(() => {
                   @click="isSearching = !isSearching"
           >
             <svg class="w-[20px] h-[20px] text-accent">
-              <use :href="'/sprite.svg#search'" />
+              <use :href="spriteHref('search')" />
             </svg>
           </button>
         </div>

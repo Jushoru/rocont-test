@@ -6,6 +6,7 @@ import { useBookStore } from "@/entities/book/bookStore";
 import { bookValidator } from "@/entities/book/bookValidation";
 import {type bookData } from "@/entities/book/bookTypes";
 import AppConfirmationDialog from "@/components/AppConfirmationDialog.vue";
+import {spriteHref} from "@/utils/spriteHref.ts";
 
 const props = defineProps<{
   dialog: InstanceType<typeof AppDialog> | undefined;
@@ -135,7 +136,7 @@ const deleteBook = () => {
              @click="showDeleteDialog()"
         >
           <svg class="w-[20px] h-[20px]" aria-label="удалить книгу">
-            <use :href="'/sprite.svg#trash'" />
+            <use :href="spriteHref('trash')" />
           </svg>
         </div>
       </div>
