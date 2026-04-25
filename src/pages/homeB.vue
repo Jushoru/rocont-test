@@ -103,7 +103,7 @@ onMounted(() => {
     <div class="relative max-w-full overflow-y-auto w-full mt-4 desktop:mb-4 tablet:mb-4 mobile:mb-14 mb-14 flex flex-col items-center">
       <div class="relative desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] w-[280px] flex flex-col items-center">
         <BookFilter @apply="handleFilter" />
-        <BooksList :filtered-books="filteredBooks"/>
+        <BooksList :filtered-books="filteredBooks" :search-query="parentSearchQuery"/>
         <div v-if="parentSearchQuery && Object.keys(filteredBooks).length === 0" class="w-full flex items-start">
           <p class="text-[16px] text-accent leading-5">По вашему запросу ничего не найдено</p>
         </div>

@@ -30,9 +30,9 @@ export const useBookStore = defineStore('samples', () => {
     };
 
     const setBooks = () => {
-        localStorage.setItem('books', JSON.stringify(books.value))
+        localStorage.setItem('books', JSON.stringify(books.value));
         getBooks();
-    }
+    };
 
     const deleteBook = async (id: string) => {
         delete books.value[id];
@@ -47,6 +47,22 @@ export const useBookStore = defineStore('samples', () => {
         return `book_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
     }
 
+    const toggleRead = (id: string) => {
+        const book = books.value[id]
+        if (!book) return
+
+        book.isRead = !book.isRead
+        setBooks()
+    }
+
+    const toggleFavorite = (id: string) => {
+        const book = books.value[id]
+        if (!book) return
+
+        book.isFavorite = !book.isFavorite
+        setBooks()
+    }
+
     return {
         books,
         errors,
@@ -57,5 +73,7 @@ export const useBookStore = defineStore('samples', () => {
         getBooks,
         setErrors,
         getNewID,
+        toggleRead,
+        toggleFavorite,
     }
 });
