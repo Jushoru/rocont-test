@@ -21,12 +21,11 @@ const imgUrl = computed(
           type="button"
           @click="$emit('btnClick')"
   >
-    <svg class="w-[20px] h-[20px] mr-[0.5px] opacity-50 group-hover:opacity-100"
+    <svg v-if="imgName" class="w-[20px] h-[20px] mr-[0.5px] opacity-50 group-hover:opacity-100"
          :aria-label="`кнопка ${text}`"
     >
-      <use :href="spriteHref(imgUrl)" />
+      <use v-if="imgUrl" :href="spriteHref(imgUrl)" />
     </svg>
-
     <span class="ml-1">{{ text }}</span>
   </button>
 </template>
