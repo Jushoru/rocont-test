@@ -14,7 +14,10 @@ const editedBook = ref<bookData>({
   author: '',
   genre: '',
   year: '',
+  isRead: false,
+  isFavorite: false
 });
+
 const editedBookId = ref<string>('');
 const dialogEditTarget = ref<InstanceType<typeof AppDialog>>()
 

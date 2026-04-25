@@ -4,6 +4,9 @@ import {spriteHref} from "@/utils/spriteHref.ts";
 import AppButton from "@/components/AppButton.vue";
 import {useBookStore} from "@/entities/book/bookStore.ts";
 import AppDialog from "@/components/AppDialog.vue";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 const emit = defineEmits<{
   (e: "update:searchQuery", value: string): void
@@ -53,9 +56,10 @@ onMounted(() => {
     <div class="desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] flex w-[280px] flex-col justify-center items-center">
       <div class="flex desktop:justify-center tablet:justify-center mobile:justify-center justify-between w-[280px] pb-4">
         <img v-if="!isSearching"
-             class="w-[55px] h-[41px]"
-             src="../../public/logo.svg"
+             class="w-[55px] h-[41px] cursor-pointer"
+             src="../../../public/logo.svg"
              alt="Логотип"
+             @click="router.push('/about')"
         />
         <div v-if="screenWidth >= 480 || isSearching" class="relative desktop:ml-[25px] tablet:ml-[25px] mobile:ml-[17px] ">
           <div class="absolute z-50 inset-y-0 left-0 pl-3 flex items-center">

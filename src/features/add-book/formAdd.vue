@@ -29,7 +29,9 @@ const formSubmit = () => {
       name: name.value,
       author: author.value,
       year: year.value,
-      genre: genre.value
+      genre: genre.value,
+      isRead: false,
+      isFavorite: false
     };
 
     bookStore.setBooks()
