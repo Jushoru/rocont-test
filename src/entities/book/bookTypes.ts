@@ -5,4 +5,6 @@ export interface bookData {
     author: string;
     year: string;
     genre: string;
+    isRead: boolean;
+    isFavorite: boolean;
 }

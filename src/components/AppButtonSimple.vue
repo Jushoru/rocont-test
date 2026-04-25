@@ -17,7 +17,7 @@ defineProps<{
     <span class="ml-1"
           :class="isRed ?
           'text-white' :
-          'text-[#8E959F]'"
+          'text-[#6f7686]'"
     >{{ text }}</span>
   </button>
 </template>
