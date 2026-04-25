@@ -48,4 +48,25 @@
         <path d="M18 6L6 18" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M6 6L18 18" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+
+    <symbol id="readActive" viewBox="0 0 24 24" fill="none">
+        <path d="M7 3H17C18.1046 3 19 3.89543 19 5V21L12 17L5 21V5C5 3.89543 5.89543 3 7 3Z"
+              fill="#1C7D41" stroke="#1C7D41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 12L11 14L15 10"
+              stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="readInactive" viewBox="0 0 24 24" fill="none">
+        <path d="M7 3H17C18.1046 3 19 3.89543 19 5V21L12 17L5 21V5C5 3.89543 5.89543 3 7 3Z"
+              fill="none" stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 12L11 14L15 10"
+              stroke="#707786" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="favoriteActive" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2.5L14.9 8.7L21.6 9.4L16.5 13.7L18.1 20.3L12 16.9L5.9 20.3L7.5 13.7L2.4 9.4L9.1 8.7L12 2.5Z"
+              fill="#F6C343" stroke="#707786" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="favoriteInactive" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2.5L14.9 8.7L21.6 9.4L16.5 13.7L18.1 20.3L12 16.9L5.9 20.3L7.5 13.7L2.4 9.4L9.1 8.7L12 2.5Z"
+              fill="none" stroke="#707786" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
 </svg>
