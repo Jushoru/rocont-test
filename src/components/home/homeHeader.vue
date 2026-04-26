@@ -3,27 +3,24 @@ import {computed, ref, onMounted, watch} from 'vue';
 import {spriteHref} from "@/utils/spriteHref.ts";
 import AppButton from "@/components/AppButton.vue";
 import {useBookStore} from "@/entities/book/bookStore.ts";
-import AppDialog from "@/components/AppDialog.vue";
 import {useRouter} from "vue-router";
 
 const router = useRouter();
 
 const emit = defineEmits<{
   (e: "update:searchQuery", value: string): void
+  (e: "add-book"): void
 }>()
 
 const bookStore = useBookStore();
 const isSearching = ref(false)
 let lastWidth = window.innerWidth
 const screenWidth = ref(window.innerWidth)
-const dialogTarget = ref<InstanceType<typeof AppDialog>>()
 const searchQuery = ref('');
 
-watch(searchQuery, (val) => {
-  emit("update:searchQuery", val)
-})
+watch(searchQuery, (val) => emit("update:searchQuery", val));
 
-const showDialog = () => dialogTarget.value?.show()
+const onAddBookClick = () => emit("add-book");
 
 const truncatedSearchQuery = computed(() => {
   const maxLength = 20;
@@ -105,7 +102,12 @@ onMounted(() => {
           <h1 class="ml-2 text-accent">{{ searchQuery === '' ? bookStore.getBookCount() : '«' + truncatedSearchQuery + '»'}}</h1>
         </div>
         <div class="min-w-[157px]" v-if="screenWidth >= 768">
-          <AppButton :isAdd="true" img-name="fileAdd" text="Добавить книгу" @click="showDialog"/>
+          <AppButton
+              :isAdd="true"
+              img-name="fileAdd"
+              text="Добавить книгу"
+              @click="onAddBookClick"
+          />
         </div>
       </div>
     </div>
