@@ -70,6 +70,11 @@ router.beforeEach((to) => {
         return true;
     }
 
+    if (page === "B") {
+        if (to.path === "/") return { path: "/home", replace: true };
+        return true;
+    }
+
     // Группа B:
     // - первый заход: /about
     // - после "Начать работу": /home
