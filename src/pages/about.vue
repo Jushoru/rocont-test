@@ -4,22 +4,13 @@ import AppButton from "@/components/AppButton.vue";
 
 const router = useRouter();
 
-function pickAB(): "A" | "B" {
-  return Math.random() < 0.5 ? "A" : "B";
-}
-
 function startWork() {
   if ((window as any).ym) {
-    (window as any).ym(108437493, 'reachGoal', 'welcome_page_continue');
+    (window as any).ym(108437493, "reachGoal", "welcome_page_continue");
   }
 
-  const existing = localStorage.getItem("page");
-  const page: "A" | "B" = existing === "A" || existing === "B" ? existing : pickAB();
-
-  localStorage.setItem("visited", "true")
-  localStorage.setItem("page", page)
-
-  router.replace(page === "A" ? "/" : "/home")
+  localStorage.setItem("visited", "true");
+  router.replace("/home");
 }
 </script>
 
