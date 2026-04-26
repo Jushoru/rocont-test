@@ -45,14 +45,28 @@ function ensurePageAssigned(): PageGroup {
     return page;
 }
 
+let abSent = false;
+
 router.beforeEach((to) => {
     // назначаем A/B на старте приложения (если ещё нет)
     const page = ensurePageAssigned();
     const visited = readVisited();
 
+    if (!abSent && typeof window !== 'undefined' && (window as any).ym) {
+        (window as any).ym(108437493, 'params', {
+            ab_test_variant: page
+        });
+        abSent = true;
+    }
+
+    // ДЛЯ ПРОВЕРКИ ГИПОТЕЗЫ 2
     // Группа A: сразу на "/", about/home запрещены
+    // if (page === "A") {
+    //     if (to.path !== "/") return { path: "/", replace: true };
+    //     return true;
+    // }
     if (page === "A") {
-        if (to.path !== "/") return { path: "/", replace: true };
+        if (to.path !== "/home") return { path: "/home", replace: true };
         return true;
     }
 
@@ -63,10 +77,6 @@ router.beforeEach((to) => {
         if (to.path !== "/about") return { path: "/about", replace: true };
         return true;
     }
-
-    // visited=true
-    if (to.path !== "/home") return { path: "/home", replace: true };
-    return true;
 });
 
 export default router;

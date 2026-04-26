@@ -34,6 +34,10 @@ const formSubmit = () => {
       isFavorite: false
     };
 
+    if ((window as any).ym) {
+      (window as any).ym(108437493, "reachGoal", "book_added");
+    }
+
     bookStore.setBooks()
     props.dialog?.close();
 

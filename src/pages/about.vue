@@ -6,7 +6,7 @@ const router = useRouter();
 
 function startWork() {
   if ((window as any).ym) {
-    (window as any).ym(108437493, "reachGoal", "welcome_page_continue");
+    (window as any).ym(108437493, "reachGoal", "start_using");
   }
 
   localStorage.setItem("visited", "true");
