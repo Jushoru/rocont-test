@@ -48,7 +48,6 @@ function ensurePageAssigned(): PageGroup {
 let abSent = false;
 
 router.beforeEach((to) => {
-    // назначаем A/B на старте приложения (если ещё нет)
     const page = ensurePageAssigned();
     const visited = readVisited();
 
@@ -71,15 +70,12 @@ router.beforeEach((to) => {
     }
 
     if (page === "B") {
-        if (to.path === "/") return { path: "/home", replace: true };
-        return true;
-    }
+        if (!visited) {
+            if (to.path !== "/about") return { path: "/about", replace: true };
+            return true;
+        }
 
-    // Группа B:
-    // - первый заход: /about
-    // - после "Начать работу": /home
-    if (!visited) {
-        if (to.path !== "/about") return { path: "/about", replace: true };
+        if (to.path === "/") return { path: "/home", replace: true };
         return true;
     }
 });
