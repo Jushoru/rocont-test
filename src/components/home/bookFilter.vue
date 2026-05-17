@@ -43,7 +43,7 @@ const resetFilters = () => {
 </script>
 
 <template>
-  <div class="w-full bg-layer rounded-xl mb-4 p-3">
+  <div class="w-full bg-layer rounded-xl mb-4 p-4">
 
     <h3 class="text-lg font-semibold mb-2">Фильтры</h3>
 

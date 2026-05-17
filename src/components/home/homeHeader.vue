@@ -49,16 +49,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full py-4 flex flex-col items-center bg-layer">
-    <div class="desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] flex w-[280px] flex-col justify-center items-center">
-      <div class="flex desktop:justify-center tablet:justify-center mobile:justify-center justify-between w-[280px] pb-4">
+  <div class="w-full py-4 desktop:px-12 tablet:px-12 px-4 flex flex-col items-center bg-layer">
+    <div class="w-full max-w-[944px] flex flex-col justify-center items-center">
+      <div class="flex desktop:justify-center tablet:justify-center mobile:justify-center justify-between min-w-full pb-4">
         <img v-if="!isSearching"
              class="w-[55px] h-[41px] cursor-pointer"
              src="../../../public/logo.svg"
              alt="Логотип"
              @click="router.push('/about')"
         />
-        <div v-if="screenWidth >= 480 || isSearching" class="relative desktop:ml-[25px] tablet:ml-[25px] mobile:ml-[17px] ">
+        <div v-if="screenWidth >= 480 || isSearching" class="relative desktop:ml-[25px] tablet:ml-[25px] mobile:ml-[17px] w-full">
           <div class="absolute z-50 inset-y-0 left-0 pl-3 flex items-center">
             <svg
                 v-if="screenWidth >= 480"
@@ -79,7 +79,7 @@ onMounted(() => {
             </button>
           </div>
           <input v-if="isSearching || screenWidth >= 480"
-                 class="relative z-0 desktop:w-[864px] tablet:w-[544px] mobile:w-[352px] w-[280px] h-[41px] pl-[36px]
+                 class="relative z-0 w-full h-[41px] pl-[36px]
                           text-[14px] leading-6 rounded-lg font-Inter
                           focus-visible:outline focus-visible:outline-green focus-visible:outline-2"
                  :placeholder="screenWidth >= 480 ? 'Найти ту самую книгу' : ''"

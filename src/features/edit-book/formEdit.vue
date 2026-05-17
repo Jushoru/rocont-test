@@ -70,7 +70,7 @@ const deleteBook = () => {
 </script>
 
 <template>
-  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[280px] bg-white mx-auto"
+  <div class="desktop:w-[464px] tablet:w-[464px] mobile:w-[424px] w-[360px] bg-white mx-auto"
   >
     <h1 class="">Изменение книги</h1>
     <p class="mt-2 text-pretty">Вы можете изменить поля уже созданной книги</p>

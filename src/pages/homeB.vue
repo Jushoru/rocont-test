@@ -103,15 +103,15 @@ onMounted(() => {
         @update:searchQuery="parentSearchQuery = $event"
         @add-book="showDialog"
     />
-    <div class="relative max-w-full overflow-y-auto w-full mt-4 desktop:mb-4 tablet:mb-4 mobile:mb-14 mb-14 flex flex-col items-center">
-      <div class="relative desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] w-[280px] flex flex-col items-center">
+    <div class="relative max-w-full overflow-y-auto w-full mt-4 desktop:px-12 tablet:px-12 px-4 desktop:mb-4 tablet:mb-4 mobile:mb-14 mb-14 flex flex-col items-center">
+      <div class="relative w-full max-w-[944px] flex flex-col items-center">
         <BookFilter @apply="handleFilter" />
         <BooksList :filtered-books="filteredBooks" :search-query="parentSearchQuery"/>
         <div v-if="parentSearchQuery && Object.keys(filteredBooks).length === 0" class="w-full flex items-start">
           <p class="text-[16px] text-accent leading-5">По вашему запросу ничего не найдено</p>
         </div>
       </div>
-      <div class="fixed mobile:w-[448px] w-[304px] bottom-2" v-if="screenWidth < 768">
+      <div class="fixed mobile:w-[448px] w-full px-[33.5px] bottom-2" v-if="screenWidth < 768">
         <AppButton :isAdd="true" img-name="fileAdd" text="Добавить книгу" @click="showDialog"/>
       </div>
     </div>
